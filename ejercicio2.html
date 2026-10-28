@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Buscador de naves espaciales</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/ejercicio2.css" />
+  </head>
+
+  <body>
+    <main class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-7">
+          <div class="panel-espacial">
+            <h2 class="titulo mb-2">BUSCADOR DE NAVES</h2>
+
+            <form id="formBuscador">
+              <div class="mb-3">
+                <label for="idnave" class="form-label">
+                  ID de la nave espacial
+                </label>
+
+                <div class="input-group">
+                  <input
+                    type="number"
+                    id="idnave"
+                    class="form-control"
+                    placeholder="Ejemplo: 9"
+                    min="1"
+                    required
+                  />
+
+                  <button type="submit" class="btn btn-espacial">BUSCAR</button>
+                </div>
+
+                <div id="mensaje"></div>
+              </div>
+
+              <hr class="separador my-4" />
+
+              <p class="etiqueta mb-3">DATOS DE LA NAVE ESPACIAL</p>
+
+              <div class="row g-3">
+                <div class="col-12">
+                  <label for="nombre" class="form-label"> Nombre </label>
+                  <input
+                    type="text"
+                    id="nombre"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+
+                <div class="col-12">
+                  <label for="modelo" class="form-label"> Modelo </label>
+                  <input
+                    type="text"
+                    id="modelo"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+
+                <div class="col-12">
+                  <label for="fabricante" class="form-label">
+                    Fabricante
+                  </label>
+                  <input
+                    type="text"
+                    id="fabricante"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="tripulacion" class="form-label">
+                    Tripulación
+                  </label>
+                  <input
+                    type="text"
+                    id="tripulacion"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+
+                <div class="col-md-6">
+                  <label for="pasajeros" class="form-label"> Pasajeros </label>
+                  <input
+                    type="text"
+                    id="pasajeros"
+                    class="form-control"
+                    readonly
+                  />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      // REFERENCIAS
+      const formulario = document.getElementById("formBuscador");
+      const idNave = document.getElementById("idnave");
+      const nombre = document.getElementById("nombre");
+      const modelo = document.getElementById("modelo");
+      const fabricante = document.getElementById("fabricante");
+      const tripulacion = document.getElementById("tripulacion");
+      const pasajeros = document.getElementById("pasajeros");
+      const mensaje = document.getElementById("mensaje");
+
+      formulario.addEventListener("submit", (event) => {
+        event.preventDefault();
+        obtenerNave(idNave.value);
+      });
+
+      async function obtenerNave(id) {
+        const API_URL = `https://swapi.dev/api/starships/${id}/`;
+
+        try {
+          mensaje.innerHTML = "";
+
+          const respuesta = await fetch(API_URL);
+
+          if (!respuesta.ok) {
+            if (respuesta.status == 404) {
+              nombre.value = "";
+              modelo.value = "";
+              fabricante.value = "";
+              tripulacion.value = "";
+              pasajeros.value = "";
+
+              mensaje.innerHTML = `
+              <div class="mensaje-error">
+                ⚠ No existe una nave con el ID: ${id} ingresado.
+              </div>
+            `;
+
+              return;
+            }
+
+            throw new Error("Error de comunicación con la API");
+          }
+
+          const datos = await respuesta.json();
+
+          // Enviando resultados al formulario
+          nombre.value = datos.name;
+          modelo.value = datos.model;
+          fabricante.value = datos.manufacturer;
+          tripulacion.value = datos.crew;
+          pasajeros.value = datos.passengers;
+
+          mensaje.innerHTML = `
+          <div class="mensaje-exito">
+             Nave espacial encontrada correctamente.
+          </div>
+        `;
+        } catch (e) {
+          console.error(e);
+
+          nombre.value = "";
+          modelo.value = "";
+          fabricante.value = "";
+          tripulacion.value = "";
+          pasajeros.value = "";
+
+          mensaje.innerHTML = `
+          <div class="mensaje-error">
+             No se pudo conectar con la API.
+          </div>
+        `;
+        }
+      }
+    </script>
+  </body>
+</html>
