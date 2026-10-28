@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador Dragon Ball</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/ejercicio3.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h3 class="text-center mb-2">
+                Buscador de personajes
+            </h3>
+
+            <p class="subtitulo text-center mb-4">
+                Dragon Ball API
+            </p>
+
+            <form id="formBuscador">
+
+
+                <div class="mb-3">
+
+                    <label for="idpersonaje" class="form-label">
+                        ID del personaje
+                    </label>
+
+                    <div class="input-group">
+
+                        <input type="number" id="idpersonaje" class="form-control" placeholder="Ejemplo: 1" min="1"
+                            required>
+
+                        <button type="submit" class="btn btn-buscar">
+                            Buscar
+                        </button>
+
+                    </div>
+
+                    <div id="mensaje"></div>
+
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="nombre" class="form-label">
+                        Nombre
+                    </label>
+
+                    <input type="text" id="nombre" class="form-control" readonly>
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="descripcion" class="form-label">
+                        Descripción
+                    </label>
+
+                    <textarea id="descripcion" class="form-control" rows="5" readonly></textarea>
+                </div>
+
+
+                <div class="text-center">
+
+                    <img id="imagen" alt="Imagen del personaje">
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script>
+        // REFERENCIAS
+        const formulario = document.getElementById("formBuscador");
+        const id = document.getElementById("idpersonaje");
+        const nombre = document.getElementById("nombre");
+        const descripcion = document.getElementById("descripcion");
+        const imagen = document.getElementById("imagen");
+        const mensaje = document.getElementById("mensaje");
+
+        formulario.addEventListener("submit", (event) => {
+            event.preventDefault();
+            obtenerPersonaje(id.value);
+        });
+
+        async function obtenerPersonaje(id) {
+
+            const API_URL = `https://dragonball-api.com/api/characters/${id}`;
+
+            try {
+
+                mensaje.textContent = "";
+
+                const respuesta = await fetch(API_URL);
+
+                if (!respuesta.ok) {
+
+                    nombre.value = '';
+                    descripcion.value = '';
+                    imagen.removeAttribute("src");
+                    imagen.style.display = "none";
+
+                    mensaje.textContent = "No existe este personaje";
+                    return;
+                }
+
+                const datos = await respuesta.json();
+
+                // Enviando resultados 
+                nombre.value = datos.name;
+                descripcion.value = datos.description;
+                imagen.src = datos.image;
+                imagen.style.display = "block";
+
+            } catch (e) {
+
+                console.error(e);
+
+                nombre.value = '';
+                descripcion.value = '';
+                imagen.removeAttribute("src");
+                imagen.style.display = "none";
+
+                mensaje.textContent = "Error al consultar la API";
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

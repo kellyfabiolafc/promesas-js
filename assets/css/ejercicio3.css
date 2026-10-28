@@ -1,0 +1,101 @@
+body {
+  background-color: #edf1f5;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.card {
+  max-width: 600px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: white;
+  border: 1px solid #dce2e8;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+h3 {
+  color: #243b59;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.subtitulo {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+
+.form-label {
+  color: #344054;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+
+.form-control {
+  border: 1px solid #cbd5e1;
+  padding: 10px 12px;
+  font-size: 15px;
+}
+
+.form-control:focus {
+  border-color: #ed8b26;
+  box-shadow: 0 0 0 3px rgba(237, 139, 38, 0.15);
+}
+
+.form-control[readonly] {
+  background-color: #f8fafc;
+}
+
+
+.btn-buscar {
+  background-color: #ed8b26;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  font-weight: bold;
+}
+
+.btn-buscar:hover {
+  background-color: #d97816;
+  color: white;
+}
+
+
+#descripcion {
+  resize: none;
+  line-height: 1.6;
+}
+
+
+#imagen {
+  display: none;
+  height: 280px;
+  max-width: 100%;
+  object-fit: contain;
+  margin: 20px auto 0;
+  filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.12));
+}
+
+
+#mensaje {
+  color: #c0392b;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+@media (max-width: 576px) {
+  .card {
+    margin: 20px auto;
+    padding: 20px;
+  }
+
+  h3 {
+    font-size: 22px;
+  }
+
+  #imagen {
+    height: 230px;
+  }
+}
