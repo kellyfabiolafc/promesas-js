@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscador Pokémon</title>
+
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/assets/css/ejercicio4.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h2 class="text-center">Pokédex</h2>
+            <p class="text-center text-secondary">
+                Buscador de Pokémon
+            </p>
+
+            <form id="formBuscador">
+
+                <label for="idpokemon" class="form-label">
+                    Nombre o ID del Pokémon
+                </label>
+
+                <div class="input-group">
+                    <input type="text" id="idpokemon" class="form-control" placeholder="Ejemplo: pikachu o 25" required>
+
+                    <button type="submit" class="btn btn-buscar">
+                        Buscar
+                    </button>
+                </div>
+
+                <p id="mensaje"></p>
+
+            </form>
+
+            <div id="resultado" class="resultado text-center" style="display: none;">
+
+                <img id="imagen" alt="Imagen del Pokémon">
+
+                <h4 id="nombre" class="mt-2"></h4>
+
+                <p class="text-secondary">
+                    Número: <span id="numero"></span>
+                </p>
+
+                <div class="row mt-3">
+
+                    <div class="col-6">
+                        <p class="mb-1">Altura</p>
+                        <strong id="altura"></strong>
+                    </div>
+
+                    <div class="col-6">
+                        <p class="mb-1">Peso</p>
+                        <strong id="peso"></strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+        // REFERENCIAS
+        const formulario = document.getElementById("formBuscador");
+        const idPokemon = document.getElementById("idpokemon");
+        const nombre = document.getElementById("nombre");
+        const numero = document.getElementById("numero");
+        const altura = document.getElementById("altura");
+        const peso = document.getElementById("peso");
+        const imagen = document.getElementById("imagen");
+        const resultado = document.getElementById("resultado");
+        const mensaje = document.getElementById("mensaje");
+
+        formulario.addEventListener("submit", (event) => {
+            event.preventDefault();
+            obtenerPokemon(idPokemon.value);
+        });
+
+        async function obtenerPokemon(id) {
+
+            const API_URL = `https://pokeapi.co/api/v2/pokemon/${id.toLowerCase().trim()}`;
+
+            try {
+
+                mensaje.textContent = "";
+                const respuesta = await fetch(API_URL);
+
+                if (!respuesta.ok) {
+                    resultado.style.display = "none";
+                    mensaje.textContent = "No existe este Pokémon";
+                    return;
+                }
+
+                const datos = await respuesta.json();
+
+                nombre.textContent = datos.name;
+                numero.textContent = datos.id;
+                altura.textContent = datos.height / 10 + " m";
+                peso.textContent = datos.weight / 10 + " kg";
+                imagen.src = datos.sprites.other["official-artwork"].front_default
+                    || datos.sprites.front_default;
+
+                resultado.style.display = "block";
+
+            } catch (e) {
+
+                console.error(e);
+                resultado.style.display = "none";
+                mensaje.textContent = "Error al consultar la API";
+
+            }
+
+        }
+    </script>
+
+</body>
+
+</html>

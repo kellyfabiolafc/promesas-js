@@ -1,0 +1,112 @@
+body {
+    background-color: #dceaf1;
+    font-family: Arial, sans-serif;
+    color: #293b49;
+}
+
+.card {
+    max-width: 550px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #fffdf9;
+    border: 1px solid #d5dce0;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.07);
+}
+
+
+h2 {
+    color: #c93d43;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+
+.form-label {
+    color: #2c4050;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+
+.form-control {
+    border: 1px solid #c8d7e1;
+    padding: 10px 12px;
+}
+
+.form-control:focus {
+    border-color: #c93d43;
+    box-shadow: none;
+}
+
+
+.btn-buscar {
+    background-color: #c93d43;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+}
+
+.btn-buscar:hover {
+    background-color: #a92e34;
+    color: white;
+}
+
+
+.resultado {
+    background-color: #e8f3f5;
+    border: 1px solid #cbdfe5;
+    border-radius: 10px;
+    padding: 25px 20px;
+    margin-top: 20px;
+}
+
+
+#imagen {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    image-rendering: auto;
+}
+
+
+#nombre {
+    color: #263e50;
+    font-size: 25px;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+
+.resultado .text-secondary {
+    color: #667787 !important;
+}
+
+
+.resultado .col-6 {
+    padding: 10px;
+}
+
+.resultado strong {
+    color: #263e50;
+}
+
+
+#mensaje {
+    color: #b52f38;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
+@media (max-width: 576px) {
+    .card {
+        margin: 20px auto;
+        padding: 20px;
+    }
+
+    #imagen {
+        width: 170px;
+        height: 170px;
+    }
+}
