@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background:
+    linear-gradient(rgba(3, 8, 28, 0.48), rgba(3, 8, 28, 0.82)),
+    url("/assets/images/fondo-estrellado.jpg") center / cover fixed no-repeat;
+
+  color: #f1f6ff;
+  font-family: Arial, sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px 15px;
+}
+
+.panel-espacial {
+  background: rgba(7, 15, 38, 0.76);
+  border: 1px solid rgba(98, 214, 255, 0.5);
+  border-radius: 22px;
+  box-shadow: 0 0 35px rgba(15, 150, 255, 0.22);
+  backdrop-filter: blur(12px);
+  padding: 30px;
+}
+
+.titulo {
+  color: #a7eeff;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 800;
+  text-shadow: 0 0 18px rgba(67, 205, 255, 0.65);
+}
+
+
+.form-label {
+  color: #d7ecff;
+  font-weight: 500;
+}
+
+.form-control {
+  color: white;
+  background: rgba(9, 22, 51, 0.84);
+  border: 1px solid #397ba6;
+  padding: 11px 14px;
+}
+
+.form-control:focus {
+  color: white;
+  background: rgba(9, 22, 51, 0.96);
+  border-color: #55dfff;
+  box-shadow: 0 0 0 0.2rem rgba(40, 194, 255, 0.16);
+}
+
+.form-control::placeholder {
+  color: #8eacc9;
+}
+
+.form-control[readonly] {
+  background: rgba(12, 24, 49, 0.68);
+}
+
+.btn-espacial {
+  background: linear-gradient(90deg, #1668d3, #00a9dd);
+  color: white;
+  border: 0;
+  border-radius: 10px;
+  padding: 12px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  box-shadow: 0 0 18px rgba(0, 167, 255, 0.3);
+}
+
+.btn-espacial:hover {
+  background: linear-gradient(90deg, #277ff0, #00bee9);
+  color: white;
+}
+
+.separador {
+  border-color: rgba(117, 207, 255, 0.35);
+}
+
+.etiqueta {
+  color: #83dfff;
+  font-size: 0.82rem;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.mensaje-error {
+  background: rgba(100, 22, 55, 0.25);
+  border: 1px solid rgba(255, 100, 150, 0.5);
+  color: #ffc3d8;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 8px;
+  box-shadow: 0 0 12px rgba(255, 45, 115, 0.08);
+}
+
+.mensaje-exito {
+  background: rgba(0, 150, 170, 0.12);
+  border: 1px solid rgba(0, 220, 255, 0.4);
+  color: #9af1ff;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-top: 8px;
+}
+@media (max-width: 576px) {
+  .panel-espacial {
+    padding: 22px 18px;
+  }
+
+  .titulo {
+    letter-spacing: 1px;
+    font-size: 1.45rem;
+  }
+}
